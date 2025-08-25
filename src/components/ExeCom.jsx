@@ -1,9 +1,9 @@
 const ExeCom = () => {
     const members = [
-        { title: "Branch Counselor", name: "[Name Here]", img: "/images/placeholder.png" },
-        { title: "Chair", name: "[Name Here]", img: "/images/placeholder.png" },
-        { title: "Vice Chair", name: "[Name Here]", img: "/images/placeholder.png" },
-        { title: "Secretary", name: "[Name Here]", img: "/images/placeholder.png" },
+        { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.jpg" },
+        { title: "Chair", name: "Abdul Kader Suhair Afran", img: "/images/afran.png" },
+        { title: "Vice Chair", name: "Rihan Muhammad Nellikar", img: "/images/rihan.jpg" },
+        { title: "Secretary", name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg" },
     ];
 
     return (

@@ -19,7 +19,7 @@ const About = () => {
                     <div>
                         <h3 className="text-2xl font-semibold text-ieee-blue mb-3">Our History</h3>
                         <p className="text-gray-700 leading-relaxed">
-                            The PACE IEEE Student Branch was established in [Your Establishment Year] with the goal of creating a vibrant technical community on campus and providing a platform for students to grow.
+                            The PACE IEEE Student Branch was established in 2018 with the goal of creating a vibrant technical community on campus and providing a platform for students to grow.
                         </p>
                     </div>
                     <div>
