@@ -39,7 +39,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen flex justify-center items-center text-center">
+    <section id="home" className="relative h-screen flex justify-center items-center text-center">
       <Particles
         id="tsparticles"
         init={particlesInit}
