@@ -1,28 +1,25 @@
-import Hero from './components/Hero';
-import Intro from './components/Intro';
-import About from './components/About';
-import Societies from './components/Societies';
-import ExeCom from './components/ExeCom';
-import Footer from './components/Footer';
+// src/App.js
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Events from './components/Events';
-import JoinUs from './components/JoinUs';
+import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import EventsPage from './pages/EventsPage';
+import ScrollToTop from './components/ScrollToTop';
+
 
 function App() {
   return (
-    <div className="bg-white text-gray-800">
-      <Navbar />
-      <Hero />
-      <main>
-        <Intro />
-        <About />
-        <Societies />
-        <Events />
-        <ExeCom />
-        <JoinUs />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <ScrollToTop />
+      <div className="bg-white text-gray-800">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/events" element={<EventsPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
