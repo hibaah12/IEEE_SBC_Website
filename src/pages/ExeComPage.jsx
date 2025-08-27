@@ -1,6 +1,6 @@
 const ExeComPage = () => {
     const members = [
-        { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.jpg" },
+        { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.png" },
         { title: "Chair", name: "Abdul Kader Suhair Afran", img: "/images/afran.png" },
         { title: "Vice Chair", name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg" },
         { title: "Secretary", name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg" },
