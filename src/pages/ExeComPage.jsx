@@ -2,24 +2,25 @@ const ExeComPage = () => {
     const members = [
         { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.jpg" },
         { title: "Chair", name: "Abdul Kader Suhair Afran", img: "/images/afran.png" },
-        { title: "Vice Chair", name: "Rihan Muhammad Nellikar", img: "/images/rihan.jpg" },
+        { title: "Vice Chair", name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg" },
         { title: "Secretary", name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg" },
     ];
 
-    // **CHANGE 1: Restructured the data to separate acronym and full name**
+    // **CHANGE 1: Removed Faculty Coordinator data, keeping only the Chair.**
     const societyChapters = [
-        { id: 1, acronym: "IEEE CEDA", fullName: "Council on Electronic Design Automation", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 2, acronym: "IEEE AESS", fullName: "Aerospace and Electronic Systems Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 3, acronym: "IEEE EMBS", fullName: "Engineering in Medicine and Biology Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 4, acronym: "IEEE TEMS", fullName: "Technology and Engineering Management Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 5, acronym: "IEEE WIE", fullName: "Women in Engineering", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 6, acronym: "IEEE RAS", fullName: "Robotics and Automation Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 7, acronym: "IEEE CIS", fullName: "Computational Intelligence Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 8, acronym: "IEEE CS", fullName: "Computer Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 9, acronym: "IEEE MTT-S", fullName: "Microwave Theory and Techniques Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 10, acronym: "IEEE GRSS", fullName: "Geoscience and Remote Sensing Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 11, acronym: "IEEE SPS", fullName: "Signal Processing Society", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
-        { id: 12, acronym: "IEEE SIGHT", fullName: "Special Interest Group on Humanitarian Technology", coordinator: { name: "[Faculty Name]", img: "/images/placeholder.png" }, chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
+        { id: 1, acronym: "IEEE CEDA", fullName: "Council on Electronic Design Automation", chair: { name: "Nihal Ahmed Shet", img: "/images/nihal.png" } },
+        { id: 2, acronym: "IEEE AESS", fullName: "Aerospace and Electronic Systems Society", chair: { name: "Aamir Habeeb", img: "/images/aamir.png" } },
+        { id: 3, acronym: "IEEE EMBS", fullName: "Engineering in Medicine and Biology Society", chair: { name: "Mohammed Zohan", img: "/images/zohan.png" } },
+        { id: 4, acronym: "IEEE TEMS", fullName: "Technology and Engineering Management Society", chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
+        { id: 5, acronym: "IEEE WIE", fullName: "Women in Engineering", chair: { name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg" } },
+        { id: 6, acronym: "IEEE RAS", fullName: "Robotics and Automation Society", chair: { name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg" } },
+        { id: 7, acronym: "IEEE ProComm", fullName: "Professional Communication Society", chair: { name: "Sayeda Mariya Nishat Munshi", img: "/images/sayeda.png" } },
+        { id: 8, acronym: "IEEE CIS", fullName: "Computational Intelligence Society", chair: { name: "Hiba A H", img: "/images/hiba.png" } },
+        { id: 9, acronym: "IEEE CS", fullName: "Computer Society", chair: { name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg" } },
+        { id: 10, acronym: "IEEE MTT-S", fullName: "Microwave Theory and Techniques Society", chair: { name: "Mohammed Zohan", img: "/images/zohan.png" } },
+        { id: 11, acronym: "IEEE GRSS", fullName: "Geoscience and Remote Sensing Society", chair: { name: "Farseen Ahras", img: "/images/ahras.png" } },
+        { id: 12, acronym: "IEEE SPS", fullName: "Signal Processing Society", chair: { name: "Farseen Ahras", img: "/images/ahras.png" } },
+        { id: 13, acronym: "IEEE SIGHT", fullName: "Special Interest Group on Humanitarian Technology", chair: { name: "[Student Name]", img: "/images/placeholder.png" } },
     ];
 
     return (
@@ -53,25 +54,22 @@ const ExeComPage = () => {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {societyChapters.map((chapter) => (
-                        <div key={chapter.id} className="bg-white border border-gray-200 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300">
+                        <div key={chapter.id} className="bg-white border border-gray-200 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-shadow duration-300 flex flex-col items-center">
                             
-                            {/* **CHANGE 2: Updated the title layout** */}
                             <div className="mb-4 min-h-[4.5rem]">
                                 <p className="text-xl font-bold text-ieee-blue">{chapter.acronym}</p>
                                 <p className="text-sm text-gray-600">{chapter.fullName}</p>
                             </div>
-
-                            <div className="flex justify-around items-start gap-4">
-                                <div>
-                                    <img src={chapter.coordinator.img} alt={chapter.coordinator.name} className="w-24 h-24 rounded-full mx-auto mb-2 object-cover border-2 border-ieee-blue" />
-                                    <h4 className="font-semibold text-gray-700">{chapter.coordinator.name}</h4>
-                                    <p className="text-sm text-ieee-blue">Faculty Coordinator</p>
-                                </div>
-                                <div>
-                                    <img src={chapter.chair.img} alt={chapter.chair.name} className="w-24 h-24 rounded-full mx-auto mb-2 object-cover border-2 border-ieee-blue" />
-                                    <h4 className="font-semibold text-gray-700">{chapter.chair.name}</h4>
-                                    <p className="text-sm text-ieee-blue">Chapter Chair</p>
-                                </div>
+                            
+                            {/* **CHANGE 2: Simplified to show only the Chapter Chair with a larger image.** */}
+                            <div>
+                                <img 
+                                    src={chapter.chair.img} 
+                                    alt={`${chapter.chair.name} - Chair`} 
+                                    className="w-32 h-32 rounded-full mx-auto mb-2 object-cover border-2 border-ieee-blue" 
+                                />
+                                <h4 className="font-semibold text-gray-700">{chapter.chair.name}</h4>
+                                <p className="text-sm text-ieee-blue">Chapter Chair</p>
                             </div>
                         </div>
                     ))}
