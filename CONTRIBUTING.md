@@ -29,7 +29,7 @@ Here’s the step-by-step workflow for making a contribution.
 * Click the green **Code** button and copy the HTTPS URL.
 * Open your terminal and run the following command, replacing `YOUR_USERNAME` with your GitHub username:
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/IEEE_SBC_Website.git](https://github.com/YOUR_USERNAME/IEEE_SBC_Website.git)
+    git clone [https://github.com/YOUR_USERNAME/IEEE_SBC_Website.git]
     ```
 
 ### 4. Set Up the Project Locally
