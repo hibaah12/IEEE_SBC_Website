@@ -1,10 +1,5 @@
 # IEEE Student Branch Website 🏛️
 
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/DHANUSHRAJA22/IEEE_SBC_Website)
-[![React](https://img.shields.io/badge/React-18.x-blue?logo=react)](https://reactjs.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](CONTRIBUTING.md)
-
 > A modern, responsive website for the IEEE Student Branch showcasing events, members, and activities with a clean, professional design.
 
 ## 🌟 Project Overview
@@ -15,11 +10,11 @@ This website serves as the digital hub for our IEEE Student Branch, providing st
 
 - 📱 **Responsive Design** - Optimized for desktop, tablet, and mobile devices
 - 🎨 **Modern UI/UX** - Clean, professional interface with smooth animations
-- 📅 **Event Management** - Dynamic event listings and registration system
+<!-- - 📅 **Event Management** - Dynamic event listings and registration system -->
 - 👥 **Member Profiles** - Showcase branch members and leadership
-- 🏆 **Activity Showcase** - Highlight branch achievements and projects
-- ⚡ **Fast Performance** - Optimized React components and efficient rendering
-- 🎯 **SEO Optimized** - Enhanced search engine visibility
+<!-- - 🏆 **Activity Showcase** - Highlight branch achievements and projects -->
+<!-- - ⚡ **Fast Performance** - Optimized React components and efficient rendering -->
+<!-- - 🎯 **SEO Optimized** - Enhanced search engine visibility -->
 
 ## 🚀 Quick Start
 
@@ -34,7 +29,7 @@ Ensure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/DHANUSHRAJA22/IEEE_SBC_Website.git
+   git clone https://github.com/Afraann/IEEE_SBC_Website.git
    cd IEEE_SBC_Website
    ```
 
@@ -79,8 +74,6 @@ IEEE_SBC_Website/
 ├── src/
 │   ├── components/         # Reusable React components
 │   ├── pages/             # Page components
-│   ├── styles/            # CSS and styling files
-│   ├── utils/             # Utility functions
 │   └── App.js             # Main application component
 ├── package.json           # Dependencies and scripts
 └── README.md             # Project documentation
@@ -102,12 +95,7 @@ We welcome contributions from all IEEE Student Branch members! Please read our [
 
 ### Project Maintainers
 
-- **DHANUSHRAJA22** - *Project Lead & Developer* - [@DHANUSHRAJA22](https://github.com/DHANUSHRAJA22)
-- **Afraann** - *Original Creator & Contributor* - [@Afraann](https://github.com/Afraann)
-
-### Contributors
-
-Thanks to all the IEEE Student Branch members who have contributed to this project! 🙏
+- **Afraann** - [@Afraann](https://github.com/Afraann)
 
 ## 📄 License
 
@@ -121,8 +109,8 @@ Visit our live website: [https://pace-ieee.vercel.app/](https://pace-ieee.vercel
 
 For questions, suggestions, or support:
 
-- 🐛 **Bug Reports**: [Open an issue](https://github.com/DHANUSHRAJA22/IEEE_SBC_Website/issues)
-- 💡 **Feature Requests**: [Open an issue](https://github.com/DHANUSHRAJA22/IEEE_SBC_Website/issues)
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/Afraann/IEEE_SBC_Website/issues)
+- 💡 **Feature Requests**: [Open an issue](https://github.com/Afraann/IEEE_SBC_Website/issues)
 - 📧 **Contact**: Reach out through the IEEE Student Branch official channels
 
 ---
