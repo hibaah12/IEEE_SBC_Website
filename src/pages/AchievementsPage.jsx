@@ -64,12 +64,30 @@ const AchievementsPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {[...achievements].reverse().map((achievement) => (
-          <div key={achievement.id} className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
-            <img src={achievement.image} alt={achievement.title} className="w-full h-48 object-cover" />
-            <div className="p-6">
+          <div 
+            key={achievement.id} 
+            className="group bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden relative 
+                       h-80 md:h-96 hover:shadow-xl transition-shadow duration-300 cursor-pointer" 
+          >
+            <img 
+              src={achievement.image} 
+              alt={achievement.title} 
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 
+                         group-hover:scale-105" 
+            />
+            
+            {/* CORRECTED: Overlay for text content - Now slides off completely */}
+            <div 
+              className="absolute inset-x-0 bottom-0 h-3/5 p-6 
+                         bg-white/80 backdrop-blur-sm 
+                         transform group-hover:translate-y-full 
+                         transition-transform duration-500 ease-in-out"
+            >
               <p className="text-sm text-gray-500 mb-2">{achievement.date}</p>
               <h3 className="text-xl font-semibold text-gray-800 mb-3">{achievement.title}</h3>
-              <p className="text-gray-700">{achievement.description}</p>
+              <p className="text-gray-700 text-sm">
+                {achievement.description}
+              </p>
             </div>
           </div>
         ))}
