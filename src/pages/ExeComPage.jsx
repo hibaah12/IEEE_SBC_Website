@@ -4,7 +4,7 @@ const ExeComPage = () => {
     // **CHANGE 1: Added linkedinUrl to the main committee members**
     const members = [
         { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.png", linkedinUrl: null }, // Example: No URL for faculty
-        { title: "Chair", name: "Abdul Kader Suhair Afran", img: "/images/afran.png", linkedinUrl: "https://www.linkedin.com/in/afraann" },
+        { title: "Chair", name: "Abdul Kader Suhair Afran", img: "/images/afran.png", linkedinUrl: "https://www.linkedin.com/in/aksafran" },
         { title: "Vice Chair", name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg", linkedinUrl: "https://www.linkedin.com/in/rihan-muhammed-nellikar-87201b238" },
         { title: "Secretary", name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: "https://www.linkedin.com/in/swati-mahesh-kuravattimath-6a0669288" },
     ];
