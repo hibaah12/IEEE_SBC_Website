@@ -8,6 +8,7 @@ const Navbar = () => {
     { title: 'Home', path: '/' },
     { title: 'Events', path: '/events' },
     { title: 'ExeCom', path: '/execom' },
+    { title: 'Achievements', path: '/achievements' },
     // This is the official IEEE page to join
     { title: 'Join Us', path: 'https://www.ieee.org/membership/join/index.html' },
   ];
