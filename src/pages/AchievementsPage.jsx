@@ -4,24 +4,52 @@ const AchievementsPage = () => {
   const achievements = [
     {
       id: 1,
-      title: "Winner at IEEE Xtreme 24-Hour Programming Competition",
-      description: "Our team 'Code Wizards' secured the 1st place in the national finals of the IEEE Xtreme programming competition.",
-      date: "October 22, 2024",
-      image: "/images/achievements/ieee-xtreme.jpg",
+      title: "3rd Place in IEEE Mangalore Subsection (2024)",
+      description: "Demonstrating a long-standing commitment to excellence, our branch secured 3rd place among all engineering colleges under the IEEE Bangalore Section for our outstanding contributions to the IEEE Mangalore Subsection in 2024.",
+      date: "March 05, 2025",
+      image: "/images/achievements/paper.jpg",
     },
     {
       id: 2,
-      title: "Best Student Branch Award - Region 10",
-      description: "Recognized for our outstanding activities, community engagement, and membership growth throughout the year.",
+      title: "Top 10 in Karnataka for Most Society Chapters",
+      description: "Our institution has been recognized as one of the top 10 in Karnataka for hosting the highest number of IEEE society chapters, showcasing our deep commitment to fostering diverse fields of innovation and learning.",
+      date: "March 05, 2025",
+      image: "/images/achievements/paper.jpg",
+    },
+    {
+      id: 3,
+      title: "Top 10 in Karnataka for Event Organization",
+      description: "Highlighting our vibrant campus life and commitment to technical engagement, our student branch has been ranked among the top 10 institutions in Karnataka for conducting the highest number of events.",
       date: "January 15, 2025",
       image: "/images/achievements/award.jpg",
     },
     {
-      id: 3,
-      title: "Published Research Paper in IEEE Access",
-      description: "A research paper on 'Advanced Signal Processing Techniques' authored by our members was published in the prestigious IEEE Access journal.",
+      id: 4,
+      title: "Outstanding Medium Student Branch Award",
+      description: "Our student branch was honored with the prestigious \"Outstanding Medium Student Branch Award,\" a testament to the collective hard work, dedication, and impactful activities organized by our team.",
+      date: "October 22, 2024",
+      image: "/images/achievements/ieee-xtreme.jpg",
+    },
+    {
+      id: 5,
+      title: "\"Most Promising Chapter\" Award by IEEE CEDA",
+      description: "Our institution, PA College of Engineering, was proudly recognized as the \"Most Promising Chapter\" by IEEE CEDA, a part of the IEEE Bangalore Section, highlighting our growing influence and potential.",
       date: "March 05, 2025",
       image: "/images/achievements/paper.jpg",
+    },
+    {
+      id: 6,
+      title: "Best Outstanding Contribution Award from IEEE CEDA",
+      description: "Dr. Mohammed Zakir received the \"Best Outstanding Contribution Award\" from the IEEE CEDA chapter under the IEEE Bangalore Section for his significant impact and dedication.",
+      date: "January 15, 2025",
+      image: "/images/achievements/award.jpg",
+    },
+    {
+      id: 7,
+      title: "Outstanding Young Professional Award for Dr. Mohammed Zakir",
+      description: "Dr. Mohammed Zakir was honored with the prestigious \"Outstanding Young Professional\" award by the IEEE Mangalore Sub-Section, recognizing his six years of dedicated contributions and perseverance in IEEE activities.",
+      date: "October 22, 2024",
+      image: "/images/achievements/ieee-xtreme.jpg",
     },
   ];
 
@@ -35,7 +63,7 @@ const AchievementsPage = () => {
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {achievements.map((achievement) => (
+        {[...achievements].reverse().map((achievement) => (
           <div key={achievement.id} className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">
             <img src={achievement.image} alt={achievement.title} className="w-full h-48 object-cover" />
             <div className="p-6">
