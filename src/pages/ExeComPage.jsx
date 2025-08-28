@@ -1,3 +1,5 @@
+import { FaLinkedin } from 'react-icons/fa';
+
 const ExeComPage = () => {
     const members = [
         { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.png" },
@@ -60,8 +62,7 @@ const ExeComPage = () => {
                                 <p className="text-xl font-bold text-ieee-blue">{chapter.acronym}</p>
                                 <p className="text-sm text-gray-600">{chapter.fullName}</p>
                             </div>
-                            
-                            {/* **CHANGE 2: Simplified to show only the Chapter Chair with a larger image.** */}
+
                             <div>
                                 <img 
                                     src={chapter.chair.img} 
@@ -69,7 +70,9 @@ const ExeComPage = () => {
                                     className="w-32 h-32 rounded-full mx-auto mb-2 object-cover border-2 border-ieee-blue" 
                                 />
                                 <h4 className="font-semibold text-gray-700">{chapter.chair.name}</h4>
-                                <p className="text-sm text-ieee-blue">Chapter Chair</p>
+                                <a href={chapter.chair.linkedinUrl} target="_blank" rel="noopener noreferrer" className="mt-2">
+                                <FaLinkedin className="text-ieee-blue text-3xl mx-auto hover:opacity-80 transition-opacity" />
+                                </a>
                             </div>
                         </div>
                     ))}
