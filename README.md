@@ -12,7 +12,7 @@ This website serves as the digital hub for our IEEE Student Branch, providing st
 - 🎨 **Modern UI/UX** - Clean, professional interface with smooth animations
 <!-- - 📅 **Event Management** - Dynamic event listings and registration system -->
 - 👥 **Member Profiles** - Showcase branch members and leadership
-<!-- - 🏆 **Activity Showcase** - Highlight branch achievements and projects -->
+- 🏆 **Activity Showcase** - Highlight branch achievements and projects
 <!-- - ⚡ **Fast Performance** - Optimized React components and efficient rendering -->
 <!-- - 🎯 **SEO Optimized** - Enhanced search engine visibility -->
 
