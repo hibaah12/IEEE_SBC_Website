@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import EventsPage from './pages/EventsPage';
 import ExeComPage from './pages/ExeComPage';
+import AchievementsPage from './pages/AchievementsPage';
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/events" element={<EventsPage />} />
           <Route path="/execom" element={<ExeComPage />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
         </Routes>
         <Footer />
       </div>
