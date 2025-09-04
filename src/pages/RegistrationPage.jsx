@@ -1,4 +1,3 @@
-// src/pages/RegistrationPage.jsx
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import RegistrationForm from '../components/RegistrationForm';
@@ -24,15 +23,14 @@ const RegistrationPage = () => {
 
   return (
     <div className="pt-24 pb-16 min-h-screen bg-gray-50 flex flex-col items-center px-4">
-      <div className="text-center mb-10 max-w-3xl"> {/* Added max-w-3xl for better text wrapping */}
+      <div className="text-center mb-10 max-w-3xl">
         <p className="text-lg text-gray-600">You are registering for:</p>
         <h1 className="text-4xl font-bold text-ieee-blue">{event.title}</h1>
-        
         <p className="mt-4 text-md text-gray-700 bg-blue-50 border border-blue-200 p-4 rounded-lg">
           {event.description}
         </p>
       </div>
-      <RegistrationForm />
+      <RegistrationForm eventId={event.id} eventTitle={event.title} />
     </div>
   );
 };

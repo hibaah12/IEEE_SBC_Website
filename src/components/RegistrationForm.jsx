@@ -1,7 +1,7 @@
-// src/components/RegistrationForm.jsx
 import React, { useState } from 'react';
+import { db } from '../firebase'; // Import the db instance from your firebase.js
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'; // Import Firestore functions
 
-// **CHANGE 1: Defined the initial state as a constant for easy reuse**
 const initialState = {
   fullName: '',
   usn: '',
@@ -14,8 +14,9 @@ const initialState = {
   memberId: '',
 };
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ eventId, eventTitle }) => {
   const [formData, setFormData] = useState(initialState);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -25,12 +26,28 @@ const RegistrationForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Submitted:', formData);
-    alert('Thank you for registering! (Form data logged to console)');
-    // **CHANGE 1 (cont.): Reset the form to its initial state after submission**
-    setFormData(initialState);
+    setIsSubmitting(true);
+
+    try {
+      // Add the form data to a 'registrations' collection in Firestore
+      await addDoc(collection(db, "registrations"), {
+        ...formData,
+        eventId: eventId, // Store which event this registration is for
+        eventTitle: eventTitle,
+        registeredAt: serverTimestamp() // Add a timestamp
+      });
+
+      alert('Thank you! Your registration has been submitted successfully.');
+      setFormData(initialState); // Clear the form
+
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert('There was an error submitting your registration. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -70,7 +87,6 @@ const RegistrationForm = () => {
         {/* Year */}
         <div>
           <label htmlFor="year" className="block text-gray-700 font-bold mb-2">Year</label>
-          {/* **CHANGE 2: Updated the Year dropdown options** */}
           <select name="year" id="year" value={formData.year} onChange={handleChange} className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ieee-blue" required>
             <option value="">Select Year</option>
             <option value="1">1</option>
@@ -83,7 +99,6 @@ const RegistrationForm = () => {
         {/* Department */}
         <div>
           <label htmlFor="department" className="block text-gray-700 font-bold mb-2">Department</label>
-          {/* **CHANGE 3: Updated the Department dropdown options** */}
           <select name="department" id="department" value={formData.department} onChange={handleChange} className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-ieee-blue" required>
             <option value="">Select Department</option>
             <option value="CSE">Computer Science and Engineering (CSE)</option>
@@ -112,8 +127,8 @@ const RegistrationForm = () => {
       </div>
       
       <div className="mt-8">
-        <button type="submit" className="w-full bg-ieee-blue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors">
-          Submit Registration
+        <button type="submit" disabled={isSubmitting} className="w-full bg-ieee-blue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors disabled:bg-gray-400">
+          {isSubmitting ? 'Submitting...' : 'Submit Registration'}
         </button>
       </div>
 
