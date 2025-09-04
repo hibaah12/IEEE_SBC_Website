@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage';
 import EventsPage from './pages/EventsPage';
 import ExeComPage from './pages/ExeComPage';
 import AchievementsPage from './pages/AchievementsPage';
+import RegistrationComingSoonPage from './pages/RegistrationComingSoonPage';
+import RegistrationPlaceholderPage from './pages/RegistrationClosedPage';
 import ScrollToTop from './components/ScrollToTop';
 
 
@@ -20,6 +22,8 @@ function App() {
           <Route path="/events" element={<EventsPage />} />
           <Route path="/execom" element={<ExeComPage />} />
           <Route path="/achievements" element={<AchievementsPage />} />
+          <Route path="/registration-coming-soon" element={<RegistrationComingSoonPage />} />
+          <Route path="/registration-closed" element={<RegistrationPlaceholderPage />} />
         </Routes>
         <Footer />
       </div>
