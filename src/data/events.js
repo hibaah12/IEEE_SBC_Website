@@ -9,6 +9,17 @@ const allEvents = [
     date: "Ongoing until Oct 2, 2025",
     image: "/images/events/30-days-of-code.jpg",
     status: "ongoing",
+    registration: "open"
+  },
+  {
+    id: 2,
+    title: "Orientation Program",
+    slug: "orientation-program",
+    description: "",
+    date: "Sept 10, 2025",
+    image: "/images/events/orientation-program.jpg",
+    status: "upcoming",
+    registration: "none"
   },
 ];
 

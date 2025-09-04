@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import allEvents from '../data/events.js'; // Imports data from a central file
+import allEvents from '../data/events.js';
 
 const EventsPage = () => {
   // Filter events based on their status
@@ -7,26 +7,40 @@ const EventsPage = () => {
   const upcomingEvents = allEvents.filter(event => event.status === 'upcoming');
   const pastEvents = allEvents.filter(event => event.status === 'past');
 
-  // A reusable component for rendering event cards
-  const EventCard = ({ event }) => (
-    <div className="group relative h-96 overflow-hidden rounded-lg border border-gray-200 bg-black shadow-md transition-shadow duration-300 hover:shadow-xl">
-      <img 
-        src={event.image} 
-        alt={event.title} 
-        className="absolute inset-0 h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-      <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-        <p className="mb-2 text-sm font-medium">{event.date}</p>
-        <h3 className="mb-3 text-xl font-semibold">{event.title}</h3>
-        {event.status !== 'past' && (
-          <Link to={`/register/${event.slug}`} className="mt-2 inline-block w-fit rounded bg-ieee-blue px-4 py-2 font-bold text-white transition-colors hover:bg-blue-800">
-            Register Now
-          </Link>
-        )}
+  // An intelligent EventCard that handles different registration states
+  const EventCard = ({ event }) => {
+    
+    const getRegistrationLink = () => {
+      switch (event.registration) {
+        case 'open':
+          return <Link to={`/register/${event.slug}`} className="mt-2 inline-block w-fit rounded bg-ieee-blue px-4 py-2 font-bold text-white transition-colors hover:bg-blue-800">Register Now</Link>;
+        case 'coming_soon':
+          return <Link to="/registration-coming-soon" className="mt-2 inline-block w-fit rounded bg-yellow-500 px-4 py-2 font-bold text-white transition-colors hover:bg-yellow-600">Coming Soon</Link>;
+        case 'closed':
+          return <Link to="/registration-closed" className="mt-2 inline-block w-fit rounded bg-red-500 px-4 py-2 font-bold text-white transition-colors hover:bg-red-600">Registrations Closed</Link>;
+        case 'none':
+          return <div className="mt-2 inline-block w-fit cursor-not-allowed rounded bg-gray-400 px-4 py-2 font-bold text-white">No Registration Required</div>;
+        default:
+          return null; // Don't show anything if registration property is missing
+      }
+    };
+
+    return (
+      <div className="group relative h-96 overflow-hidden rounded-lg border border-gray-200 bg-black shadow-md transition-shadow duration-300 hover:shadow-xl">
+        <img 
+          src={event.image} 
+          alt={event.title} 
+          className="absolute inset-0 h-full w-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+        <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
+          <p className="mb-2 text-sm font-medium">{event.date}</p>
+          <h3 className="mb-3 text-xl font-semibold">{event.title}</h3>
+          {event.status !== 'past' && getRegistrationLink()}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="pt-24 pb-16 min-h-screen container mx-auto px-4">
