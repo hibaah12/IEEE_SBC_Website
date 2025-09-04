@@ -28,8 +28,7 @@ const Footer = () => {
           </div>
         </div>
         <p>
-          &copy; {new Date().getFullYear()} PACE IEEE Student Branch. All Rights
-          Reserved.
+          This website is maintained by the IEEE Student Branch of P.A. College of Engineering, Mangalore. It is not an official IEEE global website.
         </p>
         <p className="mt-2">P A College of Engineering, Mangaluru</p>
       </div>
