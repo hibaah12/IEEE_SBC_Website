@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { CSVLink } from 'react-csv';
+import toast from 'react-hot-toast';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -28,7 +29,7 @@ const EventList = () => {
       setEvents(eventsList);
     } catch (error) {
       console.error("Error fetching events: ", error);
-      alert('Failed to fetch events. Please try again.');
+      toast.error('Failed to fetch events. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -40,10 +41,10 @@ const EventList = () => {
       setEvents(events.filter(event => event.id !== eventId));
       setShowDeleteModal(false);
       setEventToDelete(null);
-      alert('Event deleted successfully!');
+      toast.success('Event deleted successfully!');
     } catch (error) {
       console.error("Error deleting event: ", error);
-      alert('Failed to delete event. Please try again.');
+      toast.error('Failed to delete event. Please try again.');
     }
   };
 
@@ -53,10 +54,10 @@ const EventList = () => {
       setEvents(events.map(event => 
         event.id === eventId ? { ...event, status: newStatus } : event
       ));
-      alert('Event status updated successfully!');
+      toast.success('Event status updated successfully!');
     } catch (error) {
       console.error("Error updating event status: ", error);
-      alert('Failed to update event status. Please try again.');
+      toast.error('Failed to update event status. Please try again.');
     }
   };
 
@@ -78,7 +79,7 @@ const EventList = () => {
 
   const handleBulkStatusChange = async (newStatus) => {
     if (selectedEvents.length === 0) {
-      alert('Please select events to update.');
+      toast.error('Please select events to update.');
       return;
     }
 
@@ -94,10 +95,10 @@ const EventList = () => {
           : event
       ));
       setSelectedEvents([]);
-      alert(`${selectedEvents.length} events updated successfully!`);
+      toast.success(`${selectedEvents.length} events updated successfully!`);
     } catch (error) {
       console.error("Error updating events: ", error);
-      alert('Failed to update events. Please try again.');
+      toast.error('Failed to update events. Please try again.');
     }
   };
 

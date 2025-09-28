@@ -135,6 +135,9 @@ const RegistrationsViewer = () => {
     ? filteredRegistrations.filter(reg => selectedRegistrations.includes(reg.id))
     : filteredRegistrations;
 
+  const selectedEventObj = events.find(e => e.id === selectedEvent);
+  const selectedEventTitle = selectedEventObj?.title || '';
+
   if (loading) {
     return (
       <div className="p-6">
@@ -152,9 +155,19 @@ const RegistrationsViewer = () => {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3 mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Registration Management</h2>
-        <div className="flex space-x-2">
+        <div className="flex flex-wrap gap-2">
+          {selectedEvent !== 'all' && (
+            <CSVLink
+              data={filteredRegistrations}
+              headers={csvHeaders}
+              filename={`registrations_${selectedEventTitle.replace(/\s+/g,'-').toLowerCase()}.csv`}
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Export This Event
+            </CSVLink>
+          )}
           <CSVLink
             data={csvData}
             headers={csvHeaders}

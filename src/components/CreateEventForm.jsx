@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { db, storage } from '../firebase';
 import { collection, addDoc, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -33,7 +34,7 @@ const CreateEventForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!imageFile || !eventData.date) {
-      alert('Please select an image and a date for the event.');
+      toast.error('Please select an image and a date for the event.');
       return;
     }
     setIsSubmitting(true);
@@ -90,7 +91,7 @@ const CreateEventForm = () => {
               errorMessage += `Error code: ${error.code}. Please check your Firebase Storage configuration.`;
           }
           
-          alert(errorMessage);
+          toast.error(errorMessage);
           setIsSubmitting(false);
         }, 
         () => {
@@ -107,20 +108,20 @@ const CreateEventForm = () => {
               });
 
               // Show success notification
-              alert('Event created successfully!');
+              toast.success('Event created successfully!');
               setEventData(initialEventState);
               setImageFile(null);
               document.getElementById('image-input').value = null; // Clear file input
             } catch (error) {
               console.error("Error creating event document: ", error);
-              alert('Failed to save event to database.');
+              toast.error('Failed to save event to database.');
             } finally {
               setIsSubmitting(false);
               setUploadProgress(0);
             }
           }).catch((error) => {
             console.error("Error getting download URL: ", error);
-            alert('Failed to get image URL. Please try again.');
+            toast.error('Failed to get image URL. Please try again.');
             setIsSubmitting(false);
             setUploadProgress(0);
           });
@@ -128,7 +129,7 @@ const CreateEventForm = () => {
       );
     } catch (error) {
       console.error("Error initializing upload: ", error);
-      alert('Failed to initialize upload. Please check your Firebase configuration.');
+      toast.error('Failed to initialize upload. Please check your Firebase configuration.');
       setIsSubmitting(false);
     }
   };
