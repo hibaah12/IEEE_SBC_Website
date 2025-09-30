@@ -4,6 +4,7 @@ import { db } from '../firebase';
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { CSVLink } from 'react-csv';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom'; // for Edit button
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -21,8 +22,8 @@ const EventList = () => {
   const fetchEvents = async () => {
     try {
       const eventsSnapshot = await getDocs(collection(db, 'events'));
-      const eventsList = eventsSnapshot.docs.map(doc => ({ 
-        id: doc.id, 
+      const eventsList = eventsSnapshot.docs.map(doc => ({
+        id: doc.id,
         ...doc.data(),
         date: doc.data().date?.toDate ? doc.data().date.toDate() : null
       }));
@@ -51,7 +52,7 @@ const EventList = () => {
   const handleStatusChange = async (eventId, newStatus) => {
     try {
       await updateDoc(doc(db, 'events', eventId), { status: newStatus });
-      setEvents(events.map(event => 
+      setEvents(events.map(event =>
         event.id === eventId ? { ...event, status: newStatus } : event
       ));
       toast.success('Event status updated successfully!');
@@ -61,9 +62,25 @@ const EventList = () => {
     }
   };
 
+  // NEW: Handles changing the registration status
+  const handleRegistrationChange = async (eventId, newRegStatus) => {
+    const originalEvents = [...events];
+    setEvents(events.map(event =>
+      event.id === eventId ? { ...event, registration: newRegStatus } : event
+    ));
+    try {
+      await updateDoc(doc(db, 'events', eventId), { registration: newRegStatus });
+      toast.success('Registration status updated!');
+    } catch (error) {
+      console.error("Error updating registration status: ", error);
+      toast.error('Failed to update status.');
+      setEvents(originalEvents); // revert on error
+    }
+  };
+
   const handleSelectEvent = (eventId) => {
-    setSelectedEvents(prev => 
-      prev.includes(eventId) 
+    setSelectedEvents(prev =>
+      prev.includes(eventId)
         ? prev.filter(id => id !== eventId)
         : [...prev, eventId]
     );
@@ -82,15 +99,13 @@ const EventList = () => {
       toast.error('Please select events to update.');
       return;
     }
-
     try {
       const updatePromises = selectedEvents.map(eventId =>
         updateDoc(doc(db, 'events', eventId), { status: newStatus })
       );
       await Promise.all(updatePromises);
-      
-      setEvents(events.map(event => 
-        selectedEvents.includes(event.id) 
+      setEvents(events.map(event =>
+        selectedEvents.includes(event.id)
           ? { ...event, status: newStatus }
           : event
       ));
@@ -104,7 +119,7 @@ const EventList = () => {
 
   const filteredEvents = events.filter(event => {
     const matchesSearch = event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         event.description.toLowerCase().includes(searchTerm.toLowerCase());
+      event.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === 'all' || event.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
@@ -140,21 +155,20 @@ const EventList = () => {
 
   return (
     <div className="p-6">
+      {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-900">Event Management</h2>
-        <div className="flex space-x-2">
-          <CSVLink
-            data={csvData}
-            headers={csvHeaders}
-            filename="events_export.csv"
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
-          >
-            Export CSV
-          </CSVLink>
-        </div>
+        <CSVLink
+          data={csvData}
+          headers={csvHeaders}
+          filename="events_export.csv"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors"
+        >
+          Export CSV
+        </CSVLink>
       </div>
 
-      {/* Filters and Search */}
+      {/* Filters */}
       <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
@@ -238,21 +252,11 @@ const EventList = () => {
                     className="rounded border-gray-300 text-ieee-blue focus:ring-ieee-blue"
                   />
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Event
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Date
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Registration
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Registration</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
@@ -277,9 +281,7 @@ const EventList = () => {
                       )}
                       <div>
                         <div className="text-sm font-medium text-gray-900">{event.title}</div>
-                        <div className="text-sm text-gray-500 truncate max-w-xs">
-                          {event.description}
-                        </div>
+                        <div className="text-sm text-gray-500 truncate max-w-xs">{event.description}</div>
                       </div>
                     </div>
                   </td>
@@ -291,9 +293,11 @@ const EventList = () => {
                       value={event.status}
                       onChange={(e) => handleStatusChange(event.id, e.target.value)}
                       className={`text-xs px-2 py-1 rounded-full border-0 ${
-                        event.status === 'upcoming' ? 'bg-green-100 text-green-800' :
-                        event.status === 'ongoing' ? 'bg-blue-100 text-blue-800' :
-                        'bg-gray-100 text-gray-800'
+                        event.status === 'upcoming'
+                          ? 'bg-green-100 text-green-800'
+                          : event.status === 'ongoing'
+                            ? 'bg-blue-100 text-blue-800'
+                            : 'bg-gray-100 text-gray-800'
                       }`}
                     >
                       <option value="upcoming">Upcoming</option>
@@ -302,17 +306,30 @@ const EventList = () => {
                     </select>
                   </td>
                   <td className="px-6 py-4">
-                    <span className={`text-xs px-2 py-1 rounded-full ${
-                      event.registration === 'open' ? 'bg-green-100 text-green-800' :
-                      event.registration === 'closed' ? 'bg-red-100 text-red-800' :
-                      event.registration === 'coming_soon' ? 'bg-yellow-100 text-yellow-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
-                      {event.registration.replace('_', ' ')}
-                    </span>
+                    <select
+                      value={event.registration}
+                      onChange={(e) => handleRegistrationChange(event.id, e.target.value)}
+                      className={`text-xs px-2 py-1 rounded-full border-0 w-full ${
+                        event.registration === 'open'
+                          ? 'bg-green-100 text-green-800'
+                          : event.registration === 'closed'
+                            ? 'bg-red-100 text-red-800'
+                            : event.registration === 'coming_soon'
+                              ? 'bg-yellow-100 text-yellow-800'
+                              : 'bg-gray-100 text-gray-800'
+                      }`}
+                    >
+                      <option value="open">Open</option>
+                      <option value="closed">Closed</option>
+                      <option value="coming_soon">Coming Soon</option>
+                      <option value="none">None Required</option>
+                    </select>
                   </td>
                   <td className="px-6 py-4 text-sm font-medium">
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-4">
+                      <Link to={`/admin/edit-event/${event.id}`} className="text-ieee-blue hover:text-blue-800">
+                        Edit
+                      </Link>
                       <button
                         onClick={() => {
                           setEventToDelete(event);
@@ -329,7 +346,7 @@ const EventList = () => {
             </tbody>
           </table>
         </div>
-        
+
         {filteredEvents.length === 0 && (
           <div className="text-center py-8">
             <p className="text-gray-500">No events found matching your criteria.</p>
