@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom'; // 1. Import Navigate
 import RegistrationForm from '../components/RegistrationForm';
 import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -11,18 +11,19 @@ const RegistrationPage = () => {
 
   useEffect(() => {
     const fetchEvent = async () => {
-      if (!eventSlug) return;
+      if (!eventSlug) {
+        setLoading(false);
+        return;
+      }
       try {
         const eventsRef = collection(db, "events");
         const q = query(eventsRef, where("slug", "==", eventSlug));
         const querySnapshot = await getDocs(q);
         
         if (!querySnapshot.empty) {
-          // Assuming slugs are unique, we take the first document
           const eventDoc = querySnapshot.docs[0];
           setEvent({ id: eventDoc.id, ...eventDoc.data() });
         } else {
-          console.log("No such event found!");
           setEvent(null);
         }
       } catch (error) {
@@ -33,7 +34,7 @@ const RegistrationPage = () => {
     };
 
     fetchEvent();
-  }, [eventSlug]); // Re-run the effect if the eventSlug changes
+  }, [eventSlug]);
 
   if (loading) {
     return (
@@ -57,6 +58,25 @@ const RegistrationPage = () => {
     );
   }
 
+  // ** 2. ADDED SECURITY CHECK **
+  // Check the event's registration status and redirect if not 'open'.
+  switch (event.registration) {
+    case 'closed':
+      return <Navigate to="/registration-closed" />;
+    case 'coming_soon':
+      return <Navigate to="/registration-coming-soon" />;
+    case 'none':
+      // If no registration is required, just send them back to the events page.
+      return <Navigate to="/events" />;
+    case 'open':
+      // If registration is open, proceed to render the form.
+      break; 
+    default:
+      // As a fallback for any other status, redirect.
+      return <Navigate to="/events" />;
+  }
+
+  // This part will only be reached if event.registration is 'open'
   return (
     <div className="flex min-h-screen flex-col items-center bg-gray-50 px-4 pt-24 pb-16">
       <div className="mb-10 max-w-3xl text-center">
