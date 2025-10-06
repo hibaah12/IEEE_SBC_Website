@@ -1,31 +1,68 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import Confetti from "react-confetti";
 import { useState, useEffect } from "react";
 
-export default function IEEEDayPage() {
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [showCelebration, setShowCelebration] = useState(false);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+import Intro from "../components/Intro";
+import About from "../components/About";
+import Societies from "../components/Societies";
 
-  // Responsive confetti setup
+export default function IEEEDayPage() {
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [showConfetti, setShowConfetti] = useState(true);
+
+  const collegeControls = useAnimation();
+  const celebratesControls = useAnimation();
+  const logoControls = useAnimation();
+
   useEffect(() => {
     setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     const handleResize = () =>
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+
+    const confettiTimer = setTimeout(() => setShowConfetti(false), 5000);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearTimeout(confettiTimer);
+    };
   }, []);
 
-  // Celebration handler
-  const handleCelebrate = () => {
-    setShowConfetti(true);
-    setShowCelebration(true);
-    setTimeout(() => setShowConfetti(false), 5000);
-    setTimeout(() => setShowCelebration(false), 6000);
-  };
+  useEffect(() => {
+    // Bounce animation for headings and logo
+    collegeControls.start({
+      y: [0, -10, 0],
+      opacity: [0.7, 1, 0.7],
+      transition: { repeat: Infinity, duration: 2.5, ease: "easeInOut" },
+    });
+
+    celebratesControls.start({
+      y: [0, -8, 0],
+      opacity: [0.7, 1, 0.7],
+      transition: { repeat: Infinity, duration: 2.5, ease: "easeInOut" },
+    });
+
+    logoControls.start({
+      y: [0, -5, 0],
+      transition: { repeat: Infinity, duration: 2.5, ease: "easeInOut" },
+    });
+
+    // Stop after 5 seconds
+    const timer = setTimeout(() => {
+      collegeControls.stop();
+      celebratesControls.stop();
+      logoControls.stop();
+
+      collegeControls.start({ y: 0, opacity: 1 });
+      celebratesControls.start({ y: 0, opacity: 1 });
+      logoControls.start({ y: 0 });
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [collegeControls, celebratesControls, logoControls]);
 
   return (
-    <div className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 text-white pt-32 px-4">
+    <div className="relative overflow-hidden min-h-screen flex flex-col items-center justify-center bg-white text-gray-900 pt-32 px-4 font-sans">
 
       {/* 🎉 Confetti */}
       {showConfetti && (
@@ -38,113 +75,89 @@ export default function IEEEDayPage() {
         />
       )}
 
-      {/* ✨ Floating Background Accents */}
+      {/* 🌌 Background Glows */}
       <motion.div
-        animate={{ y: [0, -30, 0], opacity: [0.2, 0.4, 0.2] }}
+        animate={{ y: [0, -20, 0], opacity: [0.05, 0.15, 0.05] }}
         transition={{ repeat: Infinity, duration: 6 }}
-        className="absolute w-80 h-80 bg-indigo-400 rounded-full blur-3xl top-10 left-16 opacity-20"
+        className="absolute w-80 h-80 bg-blue-100 rounded-full blur-3xl top-10 left-16 opacity-20"
       />
       <motion.div
-        animate={{ y: [0, 30, 0], opacity: [0.2, 0.5, 0.2] }}
+        animate={{ y: [0, 20, 0], opacity: [0.05, 0.15, 0.05] }}
         transition={{ repeat: Infinity, duration: 7 }}
-        className="absolute w-96 h-96 bg-sky-400 rounded-full blur-3xl bottom-20 right-10 opacity-20"
+        className="absolute w-96 h-96 bg-blue-200 rounded-full blur-3xl bottom-20 right-10 opacity-20"
       />
 
-      {/* 🪩 Title Section */}
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-6xl font-extrabold mb-4 text-center drop-shadow-lg"
-      >
-        IEEE Day 2025 🎉
-      </motion.h1>
+      {/* 🏫 College Name + College Logo + Celebrates + IEEE Logo */}
+      <section className="flex flex-col items-center justify-center gap-6 mb-6">
+        <div className="flex items-center justify-center gap-4">
+          <motion.img
+          src="/images/pace.png"
+          alt="P.A. College Logo"
+          animate={logoControls}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="w-20 md:w-28 border-0"
+          />
 
-      <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 1 }}
-        className="text-xl text-center max-w-3xl leading-relaxed text-blue-100"
-      >
-        <span className="font-semibold text-white">"Leveraging Technology for a Better Tomorrow"</span>  
-        <br />
-        Celebrating collaboration, innovation, and the power of engineering communities worldwide.
-      </motion.p>
+          <motion.h1
+            animate={collegeControls}
+            className="uppercase text-5xl md:text-6xl font-bold text-center drop-shadow-sm font-heading"
+          >
+            P. A. COLLEGE OF ENGINEERING
+          </motion.h1>
+        </div>
 
-      {/* 💫 About Section Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        className="bg-white/10 backdrop-blur-md p-8 mt-12 rounded-3xl shadow-2xl max-w-3xl text-center border border-white/20"
-      >
-        <h2 className="text-3xl font-semibold mb-4 text-white">About IEEE Day</h2>
-        <p className="text-blue-100 leading-relaxed">
-          IEEE Day commemorates the first time engineers worldwide gathered to share technical ideas in 1884.
-          It’s a celebration of innovation, creativity, and global unity in technology.
-        </p>
-
-        <motion.button
-          whileHover={{ scale: 1.08, boxShadow: "0px 0px 15px rgba(255,255,255,0.4)" }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleCelebrate}
-          className="mt-8 bg-gradient-to-r from-yellow-300 to-yellow-500 text-blue-900 font-bold px-8 py-3 rounded-xl shadow-lg transition-all"
+        {/* 🎉 Celebrates Text */}
+        <motion.h2
+          animate={celebratesControls}
+          className="uppercase text-2xl md:text-3xl text-blue-700 font-semibold tracking-wide font-heading text-center"
         >
-          Celebrate Now 🚀
-        </motion.button>
+          CELEBRATES
+        </motion.h2>
+
+        {/* 🪩 IEEE Day Logo */}
+        <motion.img
+          src="/images/ieee-day-logo.png"
+          alt="IEEE Day 2025 Logo"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, duration: 1.2 }}
+          className="w-64 md:w-80 drop-shadow-lg mt-4"
+        />
+      </section>
+
+      {/* 📄 About Section — scroll revealed */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.2 }}
+        className="bg-white/90 backdrop-blur-sm p-8 rounded-3xl shadow-md max-w-3xl text-center border border-gray-200 mt-32"
+      >
+        <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-body">
+          IEEE Day 2025 marks a global celebration of innovation, technology, and collaboration among engineers and students worldwide.
+          <br />
+          Let’s unite to create a better tomorrow — together!
+        </p>
       </motion.div>
 
-      {/* Celebration Popup */}
-      <AnimatePresence>
-        {showCelebration && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.7, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 100, damping: 10 }}
-              className="bg-gradient-to-br from-white to-blue-100 text-blue-800 rounded-3xl p-10 text-center shadow-2xl max-w-md"
-            >
-              <motion.h2
-                initial={{ y: -20 }}
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="text-4xl font-bold mb-4"
-              >
-                🎊 Happy IEEE Day! 🎊
-              </motion.h2>
-              <p className="text-lg mb-6">
-                Celebrating innovation, community, and the spirit of technology!
-              </p>
-              <motion.div
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="text-5xl"
-              >
-                💡 ⚙️ 🌍 💙
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <main>
+        <Intro />
+        <About />
+        <Societies />
+      </main>
 
-      {/* 🌍 Footer */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.8 }}
-        transition={{ delay: 1.5 }}
-        className="mt-20 text-sm text-center text-blue-200"
-      >
-        Organized by <span className="font-semibold text-white">IEEE Student Branch Chapter</span>  
-        <br /> © 2025 IEEE SBC
-      </motion.footer>
     </div>
   );
 }
+
+
+
+
+
+
+
+
 
 
