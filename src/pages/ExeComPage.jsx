@@ -3,26 +3,26 @@ import { FaLinkedin } from 'react-icons/fa';
 const ExeComPage = () => {
     // **CHANGE 1: Added linkedinUrl to the main committee members**
     const members = [
-        { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.png", linkedinUrl: null },
+        { title: "Branch Counselor", name: "Dr. Mohammed Zakir Bellary", img: "/images/zakir.png", linkedinUrl: "https://www.linkedin.com/in/mohammed-zakir-bellary-6b5001102/" },
         { title: "Chair", name: "Abdul Kader Suhair Afran", img: "/images/afran.png", linkedinUrl: "https://www.linkedin.com/in/aksafran" },
-        { title: "Vice Chair", name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg", linkedinUrl: null },
-        { title: "Secretary", name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: null },
+        { title: "Vice Chair", name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg", linkedinUrl: "https://www.linkedin.com/in/rihanmuhammadnellikar/" },
+        { title: "Secretary", name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: "https://www.linkedin.com/in/swati-mahesh-kuravattimath110923/" },
     ];
 
     const societyChapters = [
-        { id: 1, acronym: "IEEE CEDA", fullName: "Council on Electronic Design Automation", chair: { name: "Nihal Ahmed Shet", img: "/images/nihal.png", linkedinUrl: null } },
-        { id: 2, acronym: "IEEE AESS", fullName: "Aerospace and Electronic Systems Society", chair: { name: "Aamir Habeeb", img: "/images/aamir.png", linkedinUrl: null } },
-        { id: 3, acronym: "IEEE EMBS", fullName: "Engineering in Medicine and Biology Society", chair: { name: "Mohammed Zohan", img: "/images/zohan.png", linkedinUrl: null } },
-        { id: 4, acronym: "IEEE TEMS", fullName: "Technology and Engineering Management Society", chair: { name: "Mohammed Zaid", img: "/images/zaid.png", linkedinUrl: null } },
-        { id: 5, acronym: "IEEE WIE", fullName: "Women in Engineering", chair: { name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: null } },
-        { id: 6, acronym: "IEEE RAS", fullName: "Robotics and Automation Society", chair: { name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg", linkedinUrl: null } },
+        { id: 1, acronym: "IEEE CEDA", fullName: "Council on Electronic Design Automation", chair: { name: "Nihal Ahmed Shet", img: "/images/nihal.png", linkedinUrl: "https://www.linkedin.com/in/nihal-ahmed-shet-b73164291/" } },
+        { id: 2, acronym: "IEEE AESS", fullName: "Aerospace and Electronic Systems Society", chair: { name: "Aamir Habeeb", img: "/images/aamir.png", linkedinUrl: "https://www.linkedin.com/in/aamir-habeeb-432a74350/" } },
+        { id: 3, acronym: "IEEE EMBS", fullName: "Engineering in Medicine and Biology Society", chair: { name: "Mohammed Zohan", img: "/images/zohan.png", linkedinUrl: "https://www.linkedin.com/in/mohammed-zohan-6b969035b/" } },
+        { id: 4, acronym: "IEEE TEMS", fullName: "Technology and Engineering Management Society", chair: { name: "Mohammed Zaid", img: "/images/zaid.png", linkedinUrl: "https://www.linkedin.com/in/mohammed-zaid-4a334329a/" } },
+        { id: 5, acronym: "IEEE WIE", fullName: "Women in Engineering", chair: { name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: "https://www.linkedin.com/in/swati-mahesh-kuravattimath110923/" } },
+        { id: 6, acronym: "IEEE RAS", fullName: "Robotics and Automation Society", chair: { name: "Rihan Muhammed Nellikar", img: "/images/rihan.jpg", linkedinUrl: "https://www.linkedin.com/in/rihanmuhammadnellikar/" } },
         { id: 7, acronym: "IEEE ProComm", fullName: "Professional Communication Society", chair: { name: "Sayeda Mariya Nishat Munshi", img: "/images/sayeda.png", linkedinUrl: "http://www.linkedin.com/in/sayeda-mariya-munshi-0b9368294" } },
-        { id: 8, acronym: "IEEE CIS", fullName: "Computational Intelligence Society", chair: { name: "Hiba A H", img: "/images/hiba.png", linkedinUrl: null } },
-        { id: 9, acronym: "IEEE CS", fullName: "Computer Society", chair: { name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: null } },
-        { id: 10, acronym: "IEEE MTT-S", fullName: "Microwave Theory and Techniques Society", chair: { name: "Mohammed Zohan", img: "/images/zohan.png", linkedinUrl: null } },
-        { id: 11, acronym: "IEEE GRSS", fullName: "Geoscience and Remote Sensing Society", chair: { name: "Farseen Ahras", img: "/images/ahras.png", linkedinUrl: null } },
-        { id: 12, acronym: "IEEE SPS", fullName: "Signal Processing Society", chair: { name: "Farseen Ahras", img: "/images/ahras.png", linkedinUrl: null } },
-        { id: 13, acronym: "IEEE SIGHT", fullName: "Special Interest Group on Humanitarian Technology", chair: { name: "Deepushree H P", img: "/images/deepushree.png", linkedinUrl: null } },
+        { id: 8, acronym: "IEEE CIS", fullName: "Computational Intelligence Society", chair: { name: "Hiba A H", img: "/images/hiba.png", linkedinUrl: "https://www.linkedin.com/in/hiba-ah-979920290/" } },
+        { id: 9, acronym: "IEEE CS", fullName: "Computer Society", chair: { name: "Swati Mahesh Kuravattimath", img: "/images/swathi.jpg", linkedinUrl: "https://www.linkedin.com/in/swati-mahesh-kuravattimath110923/" } },
+        { id: 10, acronym: "IEEE MTT-S", fullName: "Microwave Theory and Techniques Society", chair: { name: "Mohammed Zohan", img: "/images/zohan.png", linkedinUrl: "https://www.linkedin.com/in/mohammed-zohan-6b969035b/" } },
+        { id: 11, acronym: "IEEE GRSS", fullName: "Geoscience and Remote Sensing Society", chair: { name: "Farseen Ahras", img: "/images/ahras.png", linkedinUrl: "https://www.linkedin.com/in/farseen-ahras-427b35242/" } },
+        { id: 12, acronym: "IEEE SPS", fullName: "Signal Processing Society", chair: { name: "Farseen Ahras", img: "/images/ahras.png", linkedinUrl: "https://www.linkedin.com/in/farseen-ahras-427b35242/" } },
+        { id: 13, acronym: "IEEE SIGHT", fullName: "Special Interest Group on Humanitarian Technology", chair: { name: "Deepushree H P", img: "/images/deepushree.png", linkedinUrl: "https://www.linkedin.com/in/deepushree-h-p-07a576341/" } },
     ];
 
     return (
